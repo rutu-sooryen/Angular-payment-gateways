@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Angular-payment-paytm';
+
+  RequestAttributes = {
+      MID : 'xOpHGh95840523930721',
+      ORDER_ID : 'OrderId@1234567890',
+      CUST_ID : 'CustId@1234567890',
+      TXN_AMOUNT : '1000',
+      CHANNEL_ID : 'WEB',
+      WEBSITE : 'WEBSTAGING',
+      CHECKSUMHASH : '',
+      INDUSTRY_TYPE_ID : 'Retail',
+      CALLBACK_URL : 'https://merchant.com/callback/'
+  }
 }
