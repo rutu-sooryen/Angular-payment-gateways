@@ -14,6 +14,8 @@ export class AppComponent {
       CUST_ID : 'CustId@1234567890',
       TXN_AMOUNT : '1000',
       CHANNEL_ID : 'WEB',
+      MOBILE_NUMBER : '1234567890',
+      EMAIL : 'r.d@abc.com',
       WEBSITE : 'WEBSTAGING',
       CHECKSUMHASH : '',
       INDUSTRY_TYPE_ID : 'Retail',
