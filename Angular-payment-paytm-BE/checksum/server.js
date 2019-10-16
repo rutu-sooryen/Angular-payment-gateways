@@ -1,7 +1,7 @@
 const http = require('http');
 const https = require('https');
 const qs = require('querystring');
-const port = 8080;
+const port = 3000;
 const checksum_lib = require('./checksum.js');
 
 var PaytmConfig = {
