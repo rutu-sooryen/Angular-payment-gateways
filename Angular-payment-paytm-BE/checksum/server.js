@@ -5,9 +5,9 @@ const port = 8080;
 const checksum_lib = require('./checksum.js');
 
 var PaytmConfig = {
-	mid: "XXXXXXXXXXXXXXXXXXXX",
-	key: "XXXXXXXXXXXXXXXX",
-	website: "XXXXXXXXXX"
+	mid: "xOpHGh95840523930721",
+	key: "ugXv2LAfU!ZRwO1X",
+	website: "WEBSTAGING"
 }
 
 
@@ -20,12 +20,12 @@ http.createServer(function (req, res) {
 			params['WEBSITE']				= PaytmConfig.website;
 			params['CHANNEL_ID']			= 'WEB';
 			params['INDUSTRY_TYPE_ID']	= 'Retail';
-			params['ORDER_ID']			= 'TEST_'  + new Date().getTime();
+			params['ORDER_ID']			= 'OrderId@1234567890'  + new Date().getTime();
 			params['CUST_ID'] 			= 'Customer001';
 			params['TXN_AMOUNT']			= '1.00';
 			params['CALLBACK_URL']		= 'http://localhost:'+port+'/callback';
-			params['EMAIL']				= 'abc@mailinator.com';
-			params['MOBILE_NO']			= '7777777777';
+			params['EMAIL']				= 'r.d@abc.com';
+			params['MOBILE_NO']			= '1234567890';
 
 			checksum_lib.genchecksum(params, PaytmConfig.key, function (err, checksum) {
 
