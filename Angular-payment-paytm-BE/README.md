@@ -1,9 +1,11 @@
 # Installation Steps
+ 1. The *checksum.js* file contains *genchecksum()* and *verifychecksum()* functions. The merchant module should call these methods with the appropriate set of parameters as mentioned in the API document given [here][link1]
+ 2. Keep all the files in the folder from where you will be calling the *genchecksum()* and *verifychecksum()* methods. 
+ 3. The *checksum/server.js* file contains set required parameters and code to generate checksum to run the default transaction flow.
 
-1. Copy the 'paytm' folder, index.js, router.js and server.js into your project directory.
-2. Please set the required parameters in 'paytm/paytm_config.js' file. These parameters will be received after completing the registration process with Paytm.
-3. For the Generate Checksum URL, please use the case for '/generate_checksum' in the router.js file. For example, a generate checksum URL may look like yoursite/generate_checksum
-4. For the Verify Checksum URL, please use the case for '/verify_checksum' in the router.js file. For example, a verify checksum URL may look like yoursite/verify_checksum
+   [link1]: https://developer.paytm.com/docs
+
+
 
 # For Offline(Wallet Api) Checksum Utility below are the methods:
   1. genchecksumbystring : For generating the checksum
