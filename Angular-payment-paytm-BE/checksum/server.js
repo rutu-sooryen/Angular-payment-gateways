@@ -10,11 +10,10 @@ var PaytmConfig = {
 	website: "WEBSTAGING"
 }
 
-
 http.createServer(function (req, res) {
 
 	switch (req.url) {
-		case "/":
+		case "/genchecksum":
 			var params = {};
 			params['MID'] = PaytmConfig.mid;
 			params['WEBSITE'] = PaytmConfig.website;
