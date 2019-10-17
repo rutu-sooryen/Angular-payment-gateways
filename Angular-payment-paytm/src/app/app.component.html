@@ -1,48 +1,41 @@
 <html>
-   <head>
-      <title>Merchant Check Out Page</title>
-   </head>
-   <body>      
-        <h1>Please do not refresh this page...</h1>
-      <form method="post" action="https://securegw-stage.paytm.in/order/process" name="paytm">
-            <label>YOUR_MID_HERE</label><br/>
-                <input type="text" name="MID" [value]="RequestAttributes.MID"><br/>
-            <label>YOUR_WEBSITE_HERE</label><br/>
-                <input type="text" name="WEBSITE" [value]="RequestAttributes.WEBSITE"><br/>
-            <label>YOUR_ORDER_ID</label><br/>
-                <input type="text" name="ORDER_ID" [value]="RequestAttributes.ORDER_ID"><br/>
-            <label>CUSTOMER_ID</label><br/>
-                <input type="text" name="CUST_ID" [value]="RequestAttributes.CUST_ID"><br/>
-            <label>CUSTOMER_MOBILE_NUMBER</label><br/>
-                <input type="text" name="MOBILE_NO" [value]="RequestAttributes.MOBILE_NUMBER"><br/>
-            <label>CUSTOMER_EMAIL</label><br/>
-                <input type="text" name="EMAIL" [value]="RequestAttributes.EMAIL"><br/>
-            <label>YOUR_INDUSTRY_TYPE_ID_HERE</label><br/>
-                <input type="text" name="INDUSTRY_TYPE_ID" [value]="RequestAttributes.INDUSTRY_TYPE_ID"><br/>
-            <label>YOUR_CHANNEL_ID</label><br/>
-                <input type="text" name="CHANNEL_ID" [value]="RequestAttributes.CHANNEL_ID"><br/>
-            <label>ORDER_TRANSACTION_AMOUNT</label><br/>
-                <input type="text" name="TXN_AMOUNT" [value]="RequestAttributes.TXN_AMOUNT"><br/>
-            <label>YOUR_CALLBACK_URL</label><br/>
-                <input type="text" name="CALLBACK_URL" [value]="RequestAttributes.CALLBACK_URL"><br/>
-            <label>GENERATED_CHECKSUM_VALUE</label><br/>
-                <input type="text" name="CHECKSUMHASH" [value]=""><br/>            
-         <script type="text/javascript">
+
+<head>
+    <title>Merchant Check Out Page</title>
+</head>
+
+<body>
+    <h1>Please do not refresh this page...</h1>
+    <form method="post" action="https://securegw-stage.paytm.in/order/process" name="paytm">
+        <label>YOUR_MID_HERE</label><br />
+        <input type="text" name="MID" [value]="requestAttributes?.MID"><br />
+        <label>YOUR_WEBSITE_HERE</label><br />
+        <input type="text" name="WEBSITE" [value]="requestAttributes?.WEBSITE"><br />
+        <label>YOUR_ORDER_ID</label><br />
+        <input type="text" name="ORDER_ID" [value]="requestAttributes?.ORDER_ID"><br />
+        <label>CUSTOMER_ID</label><br />
+        <input type="text" name="CUST_ID" [value]="requestAttributes?.CUST_ID"><br />
+        <label>CUSTOMER_MOBILE_NUMBER</label><br />
+        <input type="text" name="MOBILE_NO" [value]="requestAttributes?.MOBILE_NUMBER"><br />
+        <label>CUSTOMER_EMAIL</label><br />
+        <input type="text" name="EMAIL" [value]="requestAttributes?.EMAIL"><br />
+        <label>YOUR_INDUSTRY_TYPE_ID_HERE</label><br />
+        <input type="text" name="INDUSTRY_TYPE_ID" [value]="requestAttributes?.INDUSTRY_TYPE_ID"><br />
+        <label>YOUR_CHANNEL_ID</label><br />
+        <input type="text" name="CHANNEL_ID" [value]="requestAttributes?.CHANNEL_ID"><br />
+        <label>ORDER_TRANSACTION_AMOUNT</label><br />
+        <input type="text" name="TXN_AMOUNT" [value]="requestAttributes?.TXN_AMOUNT"><br />
+        <label>YOUR_CALLBACK_URL</label><br />
+        <input type="text" name="CALLBACK_URL" [value]="requestAttributes?.CALLBACK_URL"><br />
+        <label>GENERATED_CHECKSUM_VALUE</label><br />
+        <input type="text" name="CHECKSUMHASH" [value]="requestAttributes?.CHECKSUMHASH?.checksum"><br />
+        <script type="text/javascript">
             document.paytm.submit();
-         </script>
-      </form>
-   </body>
+        </script>
+    </form>
+</body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
 
 <div class="btn-pay">
     <button class="btn">100$</button>
