@@ -13,46 +13,36 @@ var PaytmConfig = {
 
 http.createServer(function (req, res) {
 
-	switch(req.url){
+	switch (req.url) {
 		case "/":
-			var params 						= {};
-			params['MID'] 					= PaytmConfig.mid;
-			params['WEBSITE']				= PaytmConfig.website;
-			params['CHANNEL_ID']			= 'WEB';
-			params['INDUSTRY_TYPE_ID']	= 'Retail';
-			params['ORDER_ID']			= 'OrderId@1234567890'  + new Date().getTime();
-			params['CUST_ID'] 			= 'Customer001';
-			params['TXN_AMOUNT']			= '1.00';
-			params['CALLBACK_URL']		= 'http://localhost:'+port+'/callback';
-			params['EMAIL']				= 'r.d@abc.com';
-			params['MOBILE_NO']			= '1234567890';
+			var params = {};
+			params['MID'] = PaytmConfig.mid;
+			params['WEBSITE'] = PaytmConfig.website;
+			params['CHANNEL_ID'] = 'WEB';
+			params['INDUSTRY_TYPE_ID'] = 'Retail';
+			params['ORDER_ID'] = 'OrderId@1234567890' + new Date().getTime();
+			params['CUST_ID'] = 'Customer001';
+			params['TXN_AMOUNT'] = '1.00';
+			params['CALLBACK_URL'] = 'http://localhost:' + port + '/callback';
+			params['EMAIL'] = 'r.d@abc.com';
+			params['MOBILE_NO'] = '1234567890';
 
 			checksum_lib.genchecksum(params, PaytmConfig.key, function (err, checksum) {
-
-				var txn_url = "https://securegw-stage.paytm.in/theia/processTransaction"; // for staging
-				// var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
-				
-				var form_fields = "";
-				for(var x in params){
-					form_fields += "<input type='hidden' name='"+x+"' value='"+params[x]+"' >";
-				}
-				form_fields += "<input type='hidden' name='CHECKSUMHASH' value='"+checksum+"' >";
-
-				res.writeHead(200, {'Content-Type': 'text/html'});
-				res.write('<html><head><title>Merchant Checkout Page</title></head><body><center><h1>Please do not refresh this page...</h1></center><form method="post" action="'+txn_url+'" name="f1">'+form_fields+'</form><script type="text/javascript">document.f1.submit();</script></body></html>');
+				res.writeHead(200, { 'Content-Type': 'application/json' });
+				res.write(JSON.stringify({ 'checksum': checksum }));
 				res.end();
 			});
-		break;
-	
+			break;
+
 		case "/callback":
 
 			var body = '';
-	        
-	        req.on('data', function (data) {
-	            body += data;
-	        });
 
-	        req.on('end', function () {
+			req.on('data', function (data) {
+				body += data;
+			});
+
+			req.on('end', function () {
 				var html = "";
 				var post_data = qs.parse(body);
 
@@ -60,7 +50,7 @@ http.createServer(function (req, res) {
 				// received params in callback
 				console.log('Callback Response: ', post_data, "\n");
 				html += "<b>Callback Response</b><br>";
-				for(var x in post_data){
+				for (var x in post_data) {
 					html += x + " => " + post_data[x] + "<br/>";
 				}
 				html += "<br/><br/>";
@@ -71,18 +61,18 @@ http.createServer(function (req, res) {
 				// delete post_data.CHECKSUMHASH;
 				var result = checksum_lib.verifychecksum(post_data, PaytmConfig.key, checksumhash);
 				console.log("Checksum Result => ", result, "\n");
-				html += "<b>Checksum Result</b> => " + (result? "True" : "False");
+				html += "<b>Checksum Result</b> => " + (result ? "True" : "False");
 				html += "<br/><br/>";
 
 
 
 				// Send Server-to-Server request to verify Order Status
-				var params = {"MID": PaytmConfig.mid, "ORDERID": post_data.ORDERID};
+				var params = { "MID": PaytmConfig.mid, "ORDERID": post_data.ORDERID };
 
 				checksum_lib.genchecksum(params, PaytmConfig.key, function (err, checksum) {
 
 					params.CHECKSUMHASH = checksum;
-					post_data = 'JsonData='+JSON.stringify(params);
+					post_data = 'JsonData=' + JSON.stringify(params);
 
 					var options = {
 						hostname: 'securegw-stage.paytm.in', // for staging
@@ -99,21 +89,21 @@ http.createServer(function (req, res) {
 
 					// Set up the request
 					var response = "";
-					var post_req = https.request(options, function(post_res) {
+					var post_req = https.request(options, function (post_res) {
 						post_res.on('data', function (chunk) {
 							response += chunk;
 						});
 
-						post_res.on('end', function(){
+						post_res.on('end', function () {
 							console.log('S2S Response: ', response, "\n");
 
 							var _result = JSON.parse(response);
 							html += "<b>Status Check Response</b><br>";
-							for(var x in _result){
+							for (var x in _result) {
 								html += x + " => " + _result[x] + "<br/>";
 							}
 
-							res.writeHead(200, {'Content-Type': 'text/html'});
+							res.writeHead(200, { 'Content-Type': 'text/html' });
 							res.write(html);
 							res.end();
 						});
@@ -123,10 +113,10 @@ http.createServer(function (req, res) {
 					post_req.write(post_data);
 					post_req.end();
 				});
-	        });
-			
-		break;
+			});
+
+			break;
 	}
-	
+
 
 }).listen(port);
