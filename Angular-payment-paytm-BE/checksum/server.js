@@ -19,14 +19,13 @@ http.createServer(function (req, res) {
 			params['WEBSITE'] = PaytmConfig.website;
 			params['CHANNEL_ID'] = 'WEB';
 			params['INDUSTRY_TYPE_ID'] = 'Retail';
-			params['ORDER_ID'] = 'OrderId@1234567890' + new Date().getTime();
-			params['CUST_ID'] = 'Customer001';
-			params['TXN_AMOUNT'] = '1.00';
-			params['CALLBACK_URL'] = 'http://localhost:' + port + '/callback';
-			params['EMAIL'] = 'r.d@abc.com';
-			params['MOBILE_NO'] = '1234567890';
+			params['ORDER_ID'] = 'OrderId@1234567890';
+			params['CUST_ID'] = 'CustId@1234567890';
+			params['TXN_AMOUNT'] = '001.00';
+			params['CALLBACK_URL'] = 'http://localhost:4200/callback';
 
 			checksum_lib.genchecksum(params, PaytmConfig.key, function (err, checksum) {
+				console.log('BE checksum' + checksum);
 				res.writeHead(200, { 'Content-Type': 'application/json' });
 				res.write(JSON.stringify({ 'checksum': checksum }));
 				res.end();
