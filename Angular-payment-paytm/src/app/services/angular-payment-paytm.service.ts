@@ -6,9 +6,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AngularPaymentPaytmService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   getChecksum(): Observable<any> {
     return this.http.get(`${environment.baseUrl}/genchecksum`);

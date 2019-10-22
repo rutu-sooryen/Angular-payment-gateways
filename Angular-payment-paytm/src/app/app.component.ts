@@ -6,6 +6,7 @@ import { AngularPaymentPaytmService } from './services/angular-payment-paytm.ser
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'Angular-payment-paytm';
   public requestAttributes: any = {
@@ -18,8 +19,11 @@ export class AppComponent {
     INDUSTRY_TYPE_ID: 'Retail',
     CALLBACK_URL: 'http://localhost:4200/callback'
   };
+
   constructor(
-    public paytmPaymentService: AngularPaymentPaytmService) { }
+    public paytmPaymentService: AngularPaymentPaytmService
+  ) { }
+ 
   ngOnInit() {
 
     this.paytmPaymentService.getChecksum().subscribe((checksum: any) => {
