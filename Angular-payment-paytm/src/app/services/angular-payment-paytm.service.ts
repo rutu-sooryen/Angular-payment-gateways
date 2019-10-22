@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class AngularPaymentPaytmService {
 
-
   constructor(private http: HttpClient) { }
 
   getChecksum(): Observable<any> {
